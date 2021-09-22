@@ -38,3 +38,27 @@ var subsets = function (nums) {
   dfs(0, []);
   return res;
 };
+
+//=======================================================
+//combination
+//假設 arr = [0,1,2] 就把 C(3,0) + C(3,1) + C(3,2) + C(3,3) 加再一起
+//參考 https://www.youtube.com/watch?v=CUzm-buvH_8&t=528s
+
+var subsets = function (nums) {
+  let res = [];
+  function dfs(n, s, curr) {
+    if (curr.length === n) {
+      res.push([...curr]);
+      return;
+    }
+    for (let i = s; i < nums.length; i++) {
+      curr.push(nums[i]);
+      dfs(n, i + 1, curr);
+      curr.pop();
+    }
+  }
+  for (let j = 0; j <= nums.length; j++) {
+    dfs(j, 0, []);
+  }
+  return res;
+};
