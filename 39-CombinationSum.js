@@ -24,3 +24,22 @@ var combinationSum = function (candidates, target) {
 // 做一個 dfsHelper，試圖把所有解找出來
 // Q: [2,3,6,7]
 // 從 2 開始 -> 2222, 2223, 2226, 2227, 2233, 2236, 2237, 223, 226, 227, 233, 236, 237, 26, 27
+
+var combinationSum = function (candidates, target) {
+  const res = [];
+  const dfsHelper = (curr, currSum, startIdx) => {
+    if (currSum === target) {
+      res.push(curr);
+      return;
+    }
+    if (currSum > target) return;
+
+    for (let i = startIdx; i < candidates.length; i++) {
+      dfsHelper([...curr, candidates[i]], currSum + candidates[i], i);
+    }
+  };
+  dfsHelper([], 0, 0);
+  return res;
+};
+
+// 簡化上面做法，且效能更快
